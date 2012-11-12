@@ -5,16 +5,19 @@ public class TreePrinterLauncher {
     public static void main(String[] args) {
         TreePrinter breadthTreePrinter = new BreadthFirstTreePrinter();
         TreePrinter depthTreePrinter = new DepthFirstTreePrinter();
+        TreePrinter depthNonRecursiveTreePrinter = new DepthNonRecursiveTreePrinter();
 
         Comment comment = buildTree();
-
         System.out.println("Depth-first tree printer:");
         depthTreePrinter.print(comment);
 
+        comment = buildTree();
         System.out.print("\nBreadth-first tree printer:");
         breadthTreePrinter.print(comment);
 
-
+        comment = buildTree();
+        System.out.print("\nDepth-first non-recursive tree printer:");
+        depthNonRecursiveTreePrinter.print(comment);
     }
 
     private static Comment buildTree() {
