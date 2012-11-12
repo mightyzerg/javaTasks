@@ -1,5 +1,5 @@
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Deque;
+import java.util.LinkedList;
 
 /**
  * User: aborovyk
@@ -10,7 +10,7 @@ public class DepthNonRecursiveTreePrinter implements TreePrinter {
     public void print(Comment root) {
         System.out.println(root.getText());
 
-        List<Comment> queue = new ArrayList<Comment>();
+        Deque<Comment> queue = new LinkedList<Comment>();
 
         queue.add(root);
 
@@ -20,12 +20,11 @@ public class DepthNonRecursiveTreePrinter implements TreePrinter {
 
         while (!queue.isEmpty()) {
 
-            Comment comment = queue.get(queue.size() - 1);
+            Comment comment = queue.peekFirst();
 
             boolean isRepliedCommentVisited = true;
             Comment repliedComment = null;
             int i = 0;
-
 
             if (comment.getRepliedComments() != null) {
                 while (isRepliedCommentVisited && i < comment.getRepliedComments().size()) {
@@ -40,9 +39,9 @@ public class DepthNonRecursiveTreePrinter implements TreePrinter {
             if (repliedComment != null && !isRepliedCommentVisited) {
                 repliedComment.setVisited(true);
                 System.out.println(repliedComment.getText());
-                queue.add(repliedComment);
+                queue.addFirst(repliedComment);
             } else {
-                queue.remove(queue.size() - 1);
+                queue.pop();
             }
 
 
