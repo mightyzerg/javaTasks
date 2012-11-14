@@ -10,14 +10,18 @@ public class Stack<T> {
     }
 
     public void push(T object) {
-        reference.reference = getReference();
-        head = object;
+        if (object != null) {
+            reference.reference = getReference();
+            head = object;
+        }
     }
 
     public T pop() {
         T result = head;
-        head = getReference().getHead();
-        reference = getReference().getReference();
+        if (getReference() != null) {
+            head = getReference().getHead();
+            reference = getReference().getReference();
+        }
         return result;
     }
 
