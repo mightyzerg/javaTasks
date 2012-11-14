@@ -1,26 +1,35 @@
 package collections;
 
-import java.util.Vector;
+public class Stack<T> {
 
-/**
- * User: Compaq
- * Date: 12.11.12
- */
-public class Stack<T> extends Vector<T> {
+    private T head;
+    private Stack<T> reference;
 
     public boolean empty() {
-        return size() == 0;
+        return head == null;
     }
 
     public void push(T object) {
-        add(object);
+        reference.reference = getReference();
+        head = object;
     }
 
     public T pop() {
-        return remove(size()-1);
+        T result = head;
+        head = getReference().getHead();
+        reference = getReference().getReference();
+        return result;
     }
 
     public T peek() {
-        return get(0);
+        return head;
+    }
+
+    private T getHead() {
+        return head;
+    }
+
+    private Stack<T> getReference() {
+        return reference;
     }
 }
