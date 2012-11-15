@@ -2,8 +2,7 @@ package collections;
 
 public class Stack<T> {
 
-    private T head;
-    private Stack<T> reference;
+    Element head;
 
     public boolean empty() {
         return head == null;
@@ -11,29 +10,55 @@ public class Stack<T> {
 
     public void push(T object) {
         if (object != null) {
-            reference.reference = getReference();
-            head = object;
+            Element element = createElement(object);
+            element.nextElement = head;
+            head = element;
         }
     }
 
     public T pop() {
-        T result = head;
-        if (getReference() != null) {
-            head = getReference().getHead();
-            reference = getReference().getReference();
+        T result = null;
+        if (head != null) {
+            result = head.value;
+            if (head.nextElement != null) {
+                head = head.nextElement;
+            } else {
+                head = null;
+            }
         }
         return result;
     }
 
     public T peek() {
-        return head;
+        return head == null ? null : head.value;
     }
 
-    private T getHead() {
-        return head;
+    private Element createElement(T value) {
+        Element element = new Element();
+        element.value = value;
+        element.nextElement = null;
+        return element;
     }
 
-    private Stack<T> getReference() {
-        return reference;
+    public class Element {
+        public T value;
+        public Element nextElement;
+
+        @Override
+        public int hashCode() {
+            return value.hashCode() + nextElement.hashCode();
+        }
+
+        @Override
+        public boolean equals(Object obj) {
+            boolean result;
+            if (obj == null || getClass() != obj.getClass()) {
+                result = false;
+            } else {
+                Element element = (Element) obj;
+                result = value.equals(element.value) && nextElement.equals(element.nextElement);
+            }
+            return result;
+        }
     }
 }
