@@ -1,16 +1,21 @@
+import collections.Deque;
 import collections.Stack;
 
 public class CollectionsChecker {
 
     public static void main(String[] args) {
-        Stack<Integer> stack = new Stack<Integer>();
-        if (stack.empty()) {
-            stack.push(15);
-            stack.push(17);
-            stack.push(13);
-            System.out.println(stack.peek());
-            stack.pop();
-            System.out.println(stack.peek());
-        }
+        Deque<Integer> deque = new Deque<Integer>();
+        System.out.println(deque.peekLast());
+        deque.offerLast(15);
+        deque.offerLast(17);
+        deque.offerFirst(13);
+        System.out.println(deque.peekFirst());
+        System.out.println(deque.peekLast());
+        deque.pollFirst();
+        System.out.println(deque.peekFirst());
+        deque.pollLast();
+        System.out.println(deque.peekLast());
+        deque.pollFirst();
+        System.out.println(deque.peekLast());
     }
 }

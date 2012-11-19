@@ -9,16 +9,14 @@ public class Stack<T> {
     }
 
     public void push(T object) {
-        if (object != null) {
-            Element element = createElement(object);
-            element.nextElement = head;
-            head = element;
-        }
+        Element element = createElement(object);
+        element.nextElement = head;
+        head = element;
     }
 
     public T pop() {
         T result = null;
-        if (head != null) {
+        if (!empty()) {
             result = head.value;
             if (head.nextElement != null) {
                 head = head.nextElement;
@@ -30,7 +28,7 @@ public class Stack<T> {
     }
 
     public T peek() {
-        return head == null ? null : head.value;
+        return empty() ? null : head.value;
     }
 
     private Element createElement(T value) {
